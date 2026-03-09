@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Cost of the Cure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="game-container">
+
+    <!-- Title -->
+    <div class="title-image-container" style="--title-image-width: 250px;">
+        <img src="{{ url_for('static', filename='images/icons/titlepicturecolour.png') }}"
+             class="title-image">
+    </div>
+    <h2 class="drug-title">{{ drug_name.upper() }}</h2>
+
+    <!-- Large image -->
+    <div class="image-row large-image-row">
+        <div class="image-box large-box">
+            <img src="{{ url_for('static', filename='images/drug_images/' + name_image_file) }}"
+                 class="drug-image">
+        </div>
+    </div>
+
+    <!-- Hint area -->
+    <div class="hint-area">
+        {% if not show_clue and guesses_left > 1 and not game_over %}
+        <form method="post" class="hint-form">
+            <button type="submit" name="hint">Hint</button>
+        </form>
+        {% else %}
+        <div class="clue-text wide-clue">
+            {{ clue_description }}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Guess section -->
+    <div class="guess-section {% if show_clue or game_over %}clue-open{% endif %}">
+
+        <!-- Dose / Pack -->
+        <div class="side-info-row">
+            <div class="side-info left">
+                <span class="info-label">Dose Info:</span><br>
+                <span class="info-value">{{ dose_info }}</span>
+            </div>
+
+            <div class="side-info right">
+                <span class="info-label">Pack Size:</span><br>
+                <span class="info-value">{{ total_pack_size }}</span>
+            </div>
+        </div>
+
+        <!-- Icons + guesses -->
+        <div class="guess-row-container">
+
+            <div class="icon-box">
+                <div class="icon-label">{{ drug_form_description }}</div>
+                <img src="{{ url_for('static', filename='images/icons/' + form_image_file) }}">
+            </div>
+
+            <div class="guess-history">
+                {% for i in range(max_guesses) %}
+                    {% if i < guess_history|length %}
+                        {% set item = guess_history[i] %}
+                        <div class="guess-row filled" style="background-color: {{ item.color }};">
+                            <span class="guess-value">
+                                {% if item.guess is number %}
+                                    £{{ item.guess }}
+                                {% else %}
+                                    {{ item.guess }}
+                                {% endif %}
+                            </span>
+                            <span class="guess-result">{{ item.arrow }} {{ item.result }}</span>
+                        </div>
+                    {% else %}
+                        <div class="guess-row empty">
+                            <span class="guess-placeholder">Guess {{ i + 1 }}</span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="icon-box">
+                <div class="icon-label">{{ drug_form_description }}</div>
+                <img src="{{ url_for('static', filename='images/icons/' + form_image_file) }}">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Feedback -->
+    {% if last_feedback %}
+    <p class="feedback" style="color: {{ feedback_color if feedback_color else 'black' }};">
+        {{ last_feedback|replace('\n', '<br><br>')|safe }}
+    </p>
+    {% endif %}
+
+    <!-- Guess input -->
+    <form method="post" class="submit-guess-form">
+        <input type="number" step="0.01" name="guess"
+               placeholder="Enter price (£)"
+               {% if game_over %} disabled {% endif %}>
+        <button type="submit" {% if game_over %} disabled {% endif %}>Submit Guess</button>
+    </form>
+
+    <form method="post">
+        <button type="submit" name="new_game">New Game</button>
+    </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+/* -------------------------
+   Variables
+------------------------- */
+:root {
+    --side-info-offset-closed: -30px;
+    --side-info-offset-open: 10px;
+    --top-icon-size: 80px;
+}
+
+/* -------------------------
+   Fonts
+------------------------- */
+@font-face { font-family: 'Monoton'; src: url('/static/fonts/Monoton-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'BungeeShade'; src: url('/static/fonts/BungeeShade-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'Tourney'; src: url('/static/fonts/Tourney-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'ZenTokyoZoo'; src: url('/static/fonts/ZenTokyoZoo-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'Bungee'; src: url('/static/fonts/Bungee-Regular.ttf') format('truetype'); }
+
+/* -------------------------
+   General Styles
+------------------------- */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #4C92E1;
+    margin: 0;
+    padding: 0;
+}
+
+.game-container {
+    width: 90%;
+    max-width: 450px;
+    margin: 10px auto;
+    padding: 20px;
+    border: 8px solid #000;
+    border-radius: 12px;
+    background-color: #BFF6F8;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* -------------------------
+   Title Section
+------------------------- */
+.title-section { text-align: center; margin-bottom: 8px; }
+
+.title-image { width: var(--title-image-width,200px); max-width: 100%; height:auto; display:block; margin:0 auto; }
+
+h2.drug-title {
+    font-family: 'Bungee', Arial, sans-serif;
+    font-size: clamp(18px,6vw,32px);
+    margin: 5px 0 4px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 6px;
+}
+
+.drug-form-description { font-family: 'Bungee', Arial, sans-serif; font-size: 18px; text-align:center; max-width:260px; }
+
+.top-icon { width: var(--top-icon-size); height:auto; flex-shrink:0; }
+.left-icon { transform: scaleX(-1); }
+
+/* -------------------------
+   Large Image
+------------------------- */
+.large-image-row { display: flex; justify-content: center; margin-bottom: 10px; }
+.image-box { border: 4px solid #000; border-radius: 10px; padding:10px; background-color:#fff; }
+.large-box { width: 320px; height:140px; }
+.large-box img { width:100%; height:100%; object-fit:contain; }
+
+/* -------------------------
+   Hint Box
+------------------------- */
+.hint-area { display:flex; justify-content:center; margin-bottom:10px; }
+.wide-clue {
+    width: 400px;
+    border: 3px solid #000;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #fff;
+    font-style: italic;
+    font-size: 12px;
+    animation: hintPop 0.25s ease;
+}
+
+@keyframes hintPop {
+    0% { transform: scale(0.85); opacity:0; }
+    60% { transform: scale(1.05); opacity:1; }
+    100% { transform: scale(1); opacity:1; }
+}
+
+/* -------------------------
+   Side Info (Dose/Pack)
+------------------------- */
+.side-info {
+    width:115px;
+    min-height:115px;
+    padding:6px 8px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    text-align:center;
+    background:none;
+    border:none;
+}
+
+.side-info .info-label, .boxed-label {
+    border: 3px solid #000;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 2px 4px;
+    display:block;
+    font-size: 11px;
+    font-family: 'Bungee', Arial, sans-serif;
+    text-decoration:none;
+    width:100%;
+    box-sizing:border-box;
+    flex-shrink:0;
+}
+
+.side-info .info-value {
+    font-family: 'Bungee', Arial, sans-serif;
+    font-weight:700;
+    font-size: clamp(10px,2.2vw,18px);
+    margin-top:4px;
+    line-height:1.1;
+    text-align:center;
+    white-space:normal;
+    overflow-wrap: break-word;
+    width:100%;
+}
+
+/* -------------------------
+   Guess Boxes / History
+------------------------- */
+.guess-section { margin-top:10px; }
+.guess-layout { display:flex; justify-content:center; align-items:flex-start; gap:20px; }
+.guess-history { display:flex; flex-direction:column; gap:4px; }
+
+.guess-row {
+    width:110px;
+    border:2px solid #000;
+    border-radius:8px;
+    min-height:24px;
+    margin:0 auto;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: 'Bungee', Arial, sans-serif;
+    font-size:10px;
+    color:#000;
+}
+
+.guess-row.empty { background:#fafafa; }
+.guess-row.filled { animation: guessPop 0.25s ease; }
+
+.guess-value, .guess-result {
+    font-weight:bold;
+    color:black;
+    -webkit-text-stroke:0.5px white;
+    text-shadow:0.2px 0.2px 0.3px rgba(0,0,0,0.5);
+}
+
+@keyframes guessPop {
+    0% { transform: scale(0.85); opacity:0; }
+    60% { transform: scale(1.05); opacity:1; }
+    100% { transform: scale(1); }
+}
+
+/* -------------------------
+   Input / Buttons
+------------------------- */
+.submit-guess-form { margin:5px 0 10px 0; }
+input[type="text"] {
+    width:120px;
+    padding:6px;
+    font-size:16px;
+    font-family:'Bungee', Arial, sans-serif;
+}
+
+input[type="text"]::placeholder,
+input[type="text"]::-webkit-input-placeholder,
+input[type="text"]::-moz-placeholder,
+input[type="text"]:-ms-input-placeholder,
+input[type="text"]:-moz-placeholder {
+    font-family:'Bungee', Arial, sans-serif;
+    font-size:8px;
+    color:#000;
+}
+
+button { padding:6px 12px; font-family:'Bungee', Arial, sans-serif; cursor:pointer; }
+button:active { transform: scale(0.95); opacity:0.9; }
+
+/* -------------------------
+   Feedback Text
+------------------------- */
+.feedback {
+    font-family: 'Bungee', Arial, sans-serif;
+    font-size:20px;
+    font-weight:bold;
+    color:black;
+    margin:10px 0;
+    text-align:center;
+}

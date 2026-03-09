@@ -1,0 +1,201 @@
+/* -------------------------
+   Variables
+------------------------- */
+:root {
+    --side-info-offset-closed: -30px;  /* move text upward */
+    --side-info-offset-open: 10px;     /* spacing below hint when open */
+}
+
+/* -------------------------
+   Fonts
+------------------------- */
+@font-face { font-family: 'Monoton'; src: url('/static/fonts/Monoton-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'BungeeShade'; src: url('/static/fonts/BungeeShade-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'Tourney'; src: url('/static/fonts/Tourney-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'ZenTokyoZoo'; src: url('/static/fonts/ZenTokyoZoo-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'Bungee'; src: url('/static/fonts/Bungee-Regular.ttf') format('truetype'); }
+
+/* -------------------------
+   General
+------------------------- */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #4C92E1;
+    margin: 0;
+    padding: 0;
+}
+
+.game-container {
+    width: 450px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 8px solid #000;
+    border-radius: 12px;
+    background-color: #BFF6F8;
+    text-align: center;
+}
+
+/* -------------------------
+   Title
+------------------------- */
+.title-image-container {
+    text-align: center;
+    margin-bottom: 15px;
+}
+.title-image {
+    width: var(--title-image-width, 250px);
+    margin: 0 auto;
+}
+h2.drug-title {
+    font-family: 'BungeeShade', Arial, sans-serif;
+    font-size: 32px;
+    margin: 0 0 15px 0;
+}
+
+/* -------------------------
+   Large image
+------------------------- */
+.large-image-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.image-box {
+    border: 4px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+}
+.large-box {
+    width: 400px;
+    height: 175px;
+}
+.large-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* -------------------------
+   Hint
+------------------------- */
+.hint-area {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.wide-clue {
+    width: 400px;
+    border: 3px solid #000;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #fff;
+    font-style: italic;
+    font-size: 12px;
+}
+
+/* -------------------------
+   Guess section
+------------------------- */
+
+/* Dose / Pack row */
+.side-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/* Individual blocks (aligned with icons) */
+.side-info {
+    width: 115px;
+    text-align: center;
+    font-family: 'Bungee', Arial, sans-serif;
+}
+
+/* Closed state: pull upward slightly */
+.guess-section:not(.clue-open) .side-info-row {
+    margin-top: var(--side-info-offset-closed);
+    margin-bottom: 5px;
+}
+
+/* Open state: normal spacing below hint */
+.guess-section.clue-open .side-info-row {
+    margin-top: 0;
+    margin-bottom: var(--side-info-offset-open);
+}
+
+.info-label {
+    font-family: 'Bungee', Arial, sans-serif;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+.info-value {
+    font-family: 'Bungee', Arial, sans-serif;
+}
+
+/* -------------------------
+   Icons + guesses
+------------------------- */
+.guess-row-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.icon-box {
+    width: 115px;
+    border: 3px solid #000;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #fafafa;
+    text-align: center;
+}
+.icon-label {
+    font-family: 'Bungee', Arial, sans-serif;
+    font-size: 12px;
+}
+.icon-box img {
+    width: 80%;
+}
+
+.guess-history {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.guess-row {
+    width: 110px;
+    padding: 3px 8px;
+    border-radius: 8px;
+    min-height: 24px;
+    margin: 0 auto;
+    text-align: center;
+    color: #808080;
+    font-family: 'Bungee', Arial, sans-serif;
+    font-size: 10px;
+}
+
+.guess-row.empty {
+    background: #fafafa;
+    border: 2px solid #e0e0e0;
+    justify-content: center;
+}
+
+/* -------------------------
+   Buttons / inputs
+------------------------- */
+input[type="number"] {
+    width: 120px;
+    padding: 6px;
+}
+button {
+    padding: 6px 12px;
+    font-family: 'Bungee', Arial, sans-serif;
+    cursor: pointer;
+}
+.submit-guess-form {
+    margin: 5px 0 10px 0;
+}

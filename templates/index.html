@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Cost of the Cure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<script>
+function disableGuessButton() {
+    const button = document.getElementById("guessButton");
+    if (button) {
+        button.disabled = true;
+        button.innerText = "Submitting...";
+    }
+}
+</script>
+
+<body>
+<div class="game-container">
+
+    <!-- Title Section -->
+    <div class="title-section">
+        <div class="title-image-container">
+            <img src="{{ url_for('static', filename='images/icons/titlepicturecolour.png') }}" class="title-image">
+        </div>
+
+        <h2 class="drug-title">{{ drug_name.upper() }}</h2>
+
+        <!-- Form description with icons either side -->
+        <div class="form-row">
+            <img src="{{ url_for('static', filename='images/icons/' + form_image_file) }}" class="top-icon left-icon">
+            <div class="drug-form-description">{{ drug_form_description }}</div>
+            <img src="{{ url_for('static', filename='images/icons/' + form_image_file) }}" class="top-icon">
+        </div>
+    </div>
+
+    <!-- Large Image -->
+    <div class="image-row large-image-row">
+        <div class="image-box large-box">
+            <img src="{{ url_for('static', filename='images/drug_images/' + name_image_file) }}" class="drug-image">
+        </div>
+    </div>
+
+    <!-- Hint Area -->
+    <div class="hint-area">
+        {% if show_clue or game_over %}
+            <div class="clue-text wide-clue">{{ clue_description }}</div>
+        {% else %}
+            <form method="post" class="hint-form">
+                <button type="submit" name="hint">Hint</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <!-- Guess Section -->
+    <div class="guess-section {% if show_clue or game_over %}clue-open{% endif %}">
+        <div class="guess-layout">
+
+            <!-- Left Info -->
+            <div class="side-info left">
+                <span class="info-label boxed-label">DOSE<br>INFO:</span>
+                <span class="info-value">{{ dose_info|string|default('')|replace(" ", "<br>")|safe }}</span>
+            </div>
+
+            <!-- Guess Boxes -->
+            <div class="guess-history">
+                {% for i in range(max_guesses) %}
+                    {% if i < guess_history|length %}
+                        {% set item = guess_history[i] %}
+                        <div class="guess-row filled" style="background-color: {{ item.color }};">
+                            <span class="guess-value">
+                                {% if item.guess is number %}£{{ item.guess }}{% else %}{{ item.guess }}{% endif %}
+                            </span>
+                            <span class="guess-result">{{ item.arrow }} {{ item.result }}</span>
+                        </div>
+                    {% else %}
+                        <div class="guess-row empty">
+                            <span class="guess-placeholder">Guess {{ i + 1 }}</span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <!-- Right Info -->
+            <div class="side-info right">
+                <span class="info-label boxed-label">PACK<br>SIZE:</span>
+                <span class="info-value">{{ total_pack_size|string|default('')|replace(" ", "<br>")|safe }}</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Input Form -->
+    {% if not game_over %}
+        <form method="post" class="submit-guess-form" onsubmit="disableGuessButton()">
+            <input type="text"
+                   name="guess"
+                    placeholder="Enter price (£)"
+                    inputmode="decimal"
+                    pattern="^\d*\.?\d{0,2}$"
+                    autocomplete="off">
+            <button id="guessButton" type="submit">Submit Guess</button>
+        </form>
+    {% else %}
+        <div class="feedback">The actual price was £{{ correct_price }}</div>
+    {% endif %}
+
+    <!-- New Game Button -->
+    <form method="post">
+        <button type="submit" name="new_game">New Game</button>
+    </form>
+
+</div>
+</body>
+</html>
