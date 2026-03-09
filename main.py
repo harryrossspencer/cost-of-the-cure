@@ -4,6 +4,21 @@ import random
 import os
 import re
 
+###DELET
+import pandas as pd
+import re
+
+csv_path = "nhs_drug_prices_cleaned_corrected.csv"   # change to your CSV filename
+
+df = pd.read_csv(csv_path)
+
+# Remove spaces before "/" in dose_info column
+df["dose_info"] = df["dose_info"].astype(str).str.replace(r"\s+\/", "/", regex=True)
+
+# Save back to the same file
+df.to_csv(csv_path, index=False)
+###DELET
+
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"  # needed for session
 

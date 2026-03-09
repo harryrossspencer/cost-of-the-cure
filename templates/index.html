@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>The Cost of the Cure</title>
+    <title>Pharmadle</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -22,8 +22,10 @@ function disableGuessButton() {
     <!-- Title Section -->
     <div class="title-section">
         <div class="title-image-container">
-            <img src="{{ url_for('static', filename='images/icons/titlepicturecolour.png') }}" class="title-image">
+            <img src="{{ url_for('static', filename='images/icons/titlepicturepharmadle.png') }}" class="title-image">
         </div>
+
+         <div class="todays-drug-label">TODAY'S DRUG</div>
 
         <h2 class="drug-title">{{ drug_name.upper() }}</h2>
 

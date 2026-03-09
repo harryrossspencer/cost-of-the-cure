@@ -41,16 +41,38 @@ body {
 /* -------------------------
    Title Section
 ------------------------- */
-.title-section { text-align: center; margin-bottom: 8px; }
+.title-section {
+    text-align: center;
+    margin-bottom: 2px;
+}
 
-.title-image { width: var(--title-image-width,200px); max-width: 100%; height:auto; display:block; margin:0 auto; }
+.title-image-container {
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+}
+
+.title-image {
+    width: var(--title-image-width,200px);
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 2px auto;
+}
 
 h2.drug-title {
     font-family: 'Bungee', Arial, sans-serif;
     font-size: clamp(18px,6vw,32px);
-    margin: 5px 0 4px;
-    word-break: break-word;
-    overflow-wrap: break-word;
+    margin: 2px 0 3px;
+}
+
+.todays-drug-label {
+    font-family: 'Bungee', Arial, sans-serif;
+    font-size: 15px;
+    color: black;
+    text-align: center;
+    margin: 2px 0 2px 0;
+    letter-spacing: 1px;
 }
 
 .form-row {
@@ -129,12 +151,14 @@ h2.drug-title {
     font-family: 'Bungee', Arial, sans-serif;
     font-weight:700;
     font-size: clamp(10px,2.2vw,18px);
-    margin-top:4px;
+    margin-top:20px;
     line-height:1.1;
     text-align:center;
     white-space:normal;
     overflow-wrap: break-word;
     width:100%;
+    margin-left: 6px;
+
 }
 
 /* -------------------------
@@ -182,7 +206,7 @@ h2.drug-title {
 input[type="text"] {
     width:120px;
     padding:6px;
-    font-size:16px;
+    font-size:12px;
     font-family:'Bungee', Arial, sans-serif;
 }
 
@@ -192,7 +216,7 @@ input[type="text"]::-moz-placeholder,
 input[type="text"]:-ms-input-placeholder,
 input[type="text"]:-moz-placeholder {
     font-family:'Bungee', Arial, sans-serif;
-    font-size:8px;
+    font-size:12px;
     color:#000;
 }
 
